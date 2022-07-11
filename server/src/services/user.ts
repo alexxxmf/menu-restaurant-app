@@ -10,6 +10,7 @@ export const login = async ({
   email: string;
   password: string;
 }): Promise<Prisma.Prisma__UserClient<User>> => {
+  console.log(":::UserService|register:::");
   try {
     const encryptedPassword = scryptSync(
       password,

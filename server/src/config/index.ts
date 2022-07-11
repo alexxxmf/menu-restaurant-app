@@ -5,5 +5,5 @@ interface Config {
 
 export const config: Config = {
   salt: process.env.SALT,
-  keyLength: parseInt(process.env.KEY_LEN),
+  keyLength: parseInt(process.env.KEY_LEN, 10),
 };

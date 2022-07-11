@@ -19,6 +19,9 @@ export const register = async (
   res: Response<Responses.UserRegisterResponse>,
   next: NextFunction
 ) => {
+  // TODO: implement a proper logger
+  // TODO: implement a validation middleware
+  console.log(":::UserController|register:::");
   try {
     const { email, password } = req.body;
     await userService.register({ email, password });
