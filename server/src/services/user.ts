@@ -36,7 +36,7 @@ export const register = async ({
 }: {
   email: string;
   password: string;
-}): Promise<Prisma.Prisma__UserClient<User>> => {
+}) => {
   try {
     const encryptedPassword = scryptSync(
       password,
@@ -44,9 +44,12 @@ export const register = async ({
       config.keyLength
     ).toString("hex");
 
-    return await prisma.user.create({
+    const user = await prisma.user.create({
       data: { email, password: encryptedPassword },
+      select: { password: false },
     });
+
+    return user;
   } catch (e) {
     throw new Error(e);
   }

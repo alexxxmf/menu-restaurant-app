@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, response } from "express";
 import { userService } from "../../services";
 import { Responses, Requests } from "../../types";
 
@@ -22,9 +22,11 @@ export const register = async (
   // TODO: implement a proper logger
   // TODO: implement a validation middleware
   console.log(":::UserController|register:::");
+
   try {
     const { email, password } = req.body;
-    await userService.register({ email, password });
+    const user = await userService.register({ email, password });
+    return res.status(200).send(user);
   } catch (e) {
     next(e);
   }
