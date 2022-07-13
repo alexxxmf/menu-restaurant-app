@@ -19,5 +19,5 @@ app.use(expressWinston.errorLogger({ winstonInstance: logger }));
 // TODO: Add some error-handling middleware here
 
 app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`); // no-console
+  logger.info(`server started at http://localhost:${port}:`);
 });

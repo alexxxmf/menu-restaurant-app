@@ -2,6 +2,7 @@ import { Prisma, User } from "@prisma/client";
 import { prisma } from "../db";
 import { scryptSync } from "crypto";
 import { config } from "../config";
+import { logger } from "../utils";
 
 export const login = async ({
   email,
@@ -10,7 +11,7 @@ export const login = async ({
   email: string;
   password: string;
 }): Promise<Prisma.Prisma__UserClient<User["id"]>> => {
-  console.log(":::UserService|register:::");
+  logger.info(":::UserService|login:::");
   try {
     const encryptedPassword = scryptSync(
       password,
@@ -19,7 +20,7 @@ export const login = async ({
     ).toString("hex");
 
     const user = await prisma.user.findFirstOrThrow({ where: { email } });
-    console.log("user", user);
+
     if (user.password !== encryptedPassword) {
       throw new Error("Invalid credentials");
     }
@@ -37,6 +38,7 @@ export const register = async ({
   email: string;
   password: string;
 }) => {
+  logger.info(":::UserService|register:::");
   try {
     const encryptedPassword = scryptSync(
       password,

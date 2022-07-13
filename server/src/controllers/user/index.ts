@@ -3,15 +3,15 @@ import jwt from "jsonwebtoken";
 import { userService } from "../../services";
 import { Responses, Requests } from "../../types";
 import { config } from "../../config";
+import { logger } from "../../utils";
 
 export const login = async (
   req: Request<{}, {}, Requests.UserLoginRequestParams>,
   res: Response<Responses.UserLoginResponse>,
   next: NextFunction
 ) => {
-  // TODO: implement a proper logger
   // TODO: implement a validation middleware
-  console.log(":::UserController|login:::");
+  logger.info(":::UserController|login:::");
   try {
     const { email, password } = req.body;
     const userId = await userService.login({ email, password });
@@ -38,7 +38,7 @@ export const register = async (
 ) => {
   // TODO: implement a proper logger
   // TODO: implement a validation middleware
-  console.log(":::UserController|register:::");
+  logger.info(":::UserController|register:::");
   try {
     const { email, password } = req.body;
     const user = await userService.register({ email, password });
