@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction, response } from "express";
+import jwt from "jsonwebtoken";
 import { userService } from "../../services";
 import { Responses, Requests } from "../../types";
+import { config } from "../../config";
 
 export const login = async (
   req: Request<{}, {}, Requests.UserLoginRequestParams>,
@@ -12,8 +14,18 @@ export const login = async (
   console.log(":::UserController|login:::");
   try {
     const { email, password } = req.body;
-    const user = await userService.login({ email, password });
-    return res.status(200).send(user);
+    const userId = await userService.login({ email, password });
+
+    const token = jwt.sign({ id: userId }, config.jwtSecret, {
+      expiresIn: config.jwtExpirationTimeInSeconds,
+    });
+    return res.status(200).send({
+      authToken: token,
+      expiration: {
+        time: config.jwtExpirationTimeInSeconds,
+        unit: "s",
+      },
+    });
   } catch (e) {
     next(e);
   }
