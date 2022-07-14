@@ -13,7 +13,7 @@ import {
   InputRightElement,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import { Field, Form, Formik, FormikValues, useFormik } from "formik";
+import { FormikValues, useFormik } from "formik";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import * as Yup from "yup";
 
