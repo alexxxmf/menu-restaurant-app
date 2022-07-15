@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { NavBar } from "../components";
 import { QueryClientProvider } from "../contexts";
 
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ChakraProvider>
         <NavBar />
         <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </ChakraProvider>
     </QueryClientProvider>
   );

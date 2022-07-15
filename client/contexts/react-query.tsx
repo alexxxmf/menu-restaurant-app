@@ -13,11 +13,7 @@ const queryClient = new QueryClient();
 export const QueryClientProvider = ({
   children,
 }: QueryClientWrapperProps): ReactElement => {
-  queryClient.setDefaultOptions({
-    queries: {
-      staleTime: 60000, // TODO: candidate for config?
-    },
-  });
+  queryClient.setDefaultOptions({});
 
   return (
     <ReactQueryClientProvider client={queryClient}>
