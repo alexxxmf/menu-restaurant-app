@@ -26,7 +26,7 @@ const login = async (
 };
 
 export const useLogin = () => {
-  const { mutate, data, isLoading, isError } = useMutation<
+  const { mutate, data, isLoading, isError, isSuccess } = useMutation<
     LoginResponse,
     undefined,
     { email: string; password: string }
@@ -39,5 +39,6 @@ export const useLogin = () => {
     data,
     isError,
     isLoading,
+    isSuccess,
   };
 };

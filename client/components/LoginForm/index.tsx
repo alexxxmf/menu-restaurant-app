@@ -42,8 +42,6 @@ const initialValues = {
 export const LoginForm = ({ onSubmitHandler }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  console.log("onSubmitHandler", onSubmitHandler);
-
   const formik = useFormik({
     initialValues,
     onSubmit: (values: FormValues) => {
@@ -53,8 +51,7 @@ export const LoginForm = ({ onSubmitHandler }: Props) => {
     validationSchema: loginValidationSchema,
   });
 
-  const { submitForm, handleChange, values, errors, resetForm, isSubmitting } =
-    formik;
+  const { handleChange, values, errors, resetForm, isSubmitting } = formik;
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
