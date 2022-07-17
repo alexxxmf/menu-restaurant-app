@@ -17,6 +17,15 @@ import { FormikValues, useFormik } from "formik";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import * as Yup from "yup";
 
+interface FormValues {
+  email: string;
+  password: string;
+}
+
+interface Props {
+  onSubmitHandler: (values: FormValues) => void;
+}
+
 const loginValidationSchema = Yup.object().shape({
   email: Yup.string().email().required("Required"),
   password: Yup.string().min(16, "Too Short!").required("Required"),
@@ -30,12 +39,15 @@ const initialValues = {
   password: "",
 };
 
-export const LoginForm = () => {
+export const LoginForm = ({ onSubmitHandler }: Props) => {
   const [showPassword, setShowPassword] = useState(false);
+
+  console.log("onSubmitHandler", onSubmitHandler);
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values: FormikValues) => {
+    onSubmit: (values: FormValues) => {
+      values.email;
       alert(JSON.stringify(values, null, 2));
     },
     validationSchema: loginValidationSchema,
@@ -51,7 +63,7 @@ export const LoginForm = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          submitForm();
+          onSubmitHandler(values);
           resetForm();
         }}
       >
@@ -68,7 +80,7 @@ export const LoginForm = () => {
               </InputLeftElement>
               <Input
                 type="email"
-                name="name"
+                name="email"
                 placeholder="email address"
                 value={values.email}
                 onChange={handleChange}

@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { json } from "body-parser";
 import expressWinston from "express-winston";
 
@@ -7,6 +8,8 @@ import { logger } from "./utils";
 
 const app = express();
 const port = 8080; // default port to listen
+
+app.use(cors());
 
 app.use(json());
 
