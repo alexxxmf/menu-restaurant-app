@@ -14,7 +14,17 @@ generator erd {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
+  id                String    @id @default(uuid())
+  email             String    @unique
+  password          String
+  venues            Venue[]   
+}
+
+model Venue {
+  id                String    @id @default(uuid())
+  ownerId           String
+  owner             User      @relation(fields: [ownerId], references: [id])
+  name              String
+  mainImage         String
+  numberOfTables    Int
 }

@@ -8,9 +8,13 @@ import { loginHooks } from "./hooks";
 const Login: NextPage = () => {
   const toast = useToast();
   const router = useRouter();
+  // TODO: is it preferable this or instead, perhaps adding this into deps for
+  // the useEffect down below
   const toastRef = useRef(toast);
   const routerRef = useRef(router);
   const { login, isError, isLoading, data, isSuccess } = loginHooks.useLogin();
+
+  // TODO: perhaps move this into a onSuccess and onError handlerrs that we pass to reqct query??
 
   useEffect(() => {
     if (isError) {
@@ -35,6 +39,9 @@ const Login: NextPage = () => {
     }
   }, [isError, isSuccess]);
 
+  // TODO: perhaps adding some extra props to login form so we can
+  // show a spinner, disable the button or perhaps a dynamic gradient showing
+  // button is doing something behind the scenes
   if (isLoading) {
     return <p>loading</p>;
   }
