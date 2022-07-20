@@ -3,8 +3,8 @@ import { venueController } from "../../controllers";
 
 export const userRouter = Router();
 
-userRouter.get("/", venueController.list);
-// userRouter.get("/:id", venueController.get);
-// userRouter.post("/", venueController.create);
-// userRouter.patch("/:id", venueController.update);
-// userRouter.delete("/:id");
+userRouter.get("/", venueController.listVenues);
+userRouter.get("/:id", venueController.getVenue);
+userRouter.post("/", venueController.createVenue);
+userRouter.patch("/:id", venueController.updateVenues);
+userRouter.delete("/:id", venueController.deleteVenue);

@@ -1,7 +1,8 @@
 import { Prisma, Venue } from "@prisma/client";
 import { prisma } from "../db";
 import { logger } from "../utils";
-import { CreateVenuePayload, EditVenuePayload } from "../types/requests";
+import { CreateVenuePayload, UpdateVenuePayload } from "../types/requests";
+import { Requests } from "../types";
 
 export const listVenues = async (): Promise<
   Prisma.Prisma__UserClient<Venue[]>
@@ -59,11 +60,11 @@ export const deleteVenue = async ({
   }
 };
 
-export const editVenue = async ({
-  id,
-  ...payload
-}: EditVenuePayload): Promise<Prisma.Prisma__UserClient<Venue>> => {
-  logger.info(":::VenueService|editVenue:::");
+export const updateVenue = async (
+  id: Requests.UpdateVenueRequestParams["id"],
+  payload: Requests.UpdateVenuePayload
+): Promise<Prisma.Prisma__UserClient<Venue>> => {
+  logger.info(":::VenueService|updateVenue:::");
   try {
     const venue = await prisma.venue.update({ where: { id }, data: payload });
     return venue;

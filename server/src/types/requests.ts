@@ -10,11 +10,23 @@ export interface UserRegisterRequestParams {
   password: string;
 }
 
+export interface GetVenueRequestParams {
+  id: string;
+}
+
+export interface DeleteVenueRequestParams {
+  id: string;
+}
+
+export interface UpdateVenueRequestParams {
+  id: string;
+}
+
 export type CreateVenuePayload = Pick<
   Venue,
   "ownerId" | "mainImage" | "name" | "numberOfTables"
 >;
 
-export type EditVenuePayload = Partial<
+export type UpdateVenuePayload = Partial<
   Pick<Venue, "ownerId" | "mainImage" | "name" | "numberOfTables">
-> & { id: string };
+>;
